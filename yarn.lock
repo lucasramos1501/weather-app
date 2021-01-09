@@ -4426,6 +4426,13 @@ path-parse@^1.0.6:
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
 
+picsum-photos@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/picsum-photos/-/picsum-photos-3.0.6.tgz#7f07dcf426305c2a8024623571f567ba85a81ef6"
+  integrity sha512-/K91Jn3DO+f3J3Mv87jDQbmlXxhTaTdiwnX4CSxkjbk7gmsn9aLMQck3A7CliCoRHgIp9AQBdb7o+4dr1+YBWw==
+  dependencies:
+    axios "^0.21.0"
+
 pify@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
