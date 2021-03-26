@@ -11,33 +11,39 @@ import axios from 'axios';
 
 export default function App() {
 	const BGImage = Picsum.url();
-	const [weatherData, setWeatherData] = useState();
-	const [location, setLocation] = useState();
+	const [weatherData, setWeatherData] = useState(null);
+	const [location, setLocation] = useState(null);
 	const [attData, setAttData] = useState()
-	
-	useEffect(()=>{	
-		async function getWatherData(lat, long){
-			const params = {
-				access_key: "bb290c73b9905318c13ae3d9b7bf4d91",
-				query: `Santo Antonio de Jesus`
+
+	useEffect(()=>{
+		(async ()=>{
+			let { status } = await Location.requestPermissionsAsync();
+			if(status !== "granted") {
+				alert("Permissão para acessar a sua localização negada!");
+				return;
 			}
 
-			const response = await axios.get("http://api.weatherstack.com/current", {params});
+			let { coords } = await Location.getLastKnownPositionAsync();
+			setLocation({lat: coords.latitude, lon: coords.longitude});
+		})();
 
-			setWeatherData(response.data);	
-		}
+		(async ()=>{
+			let lat = location.lat;
+			let lon = location.lon;
 
-		async function getLocation(){
-			await Location.requestPermissionsAsync();
-			
-			await Location.getCurrentPositionAsync({})
-				.then(response => {
-					setLocation(response.coords);
-					getWatherData(response.coords.latitude, response.coords.longitude);
-				})
-			}
-
-		getLocation();
+			axios.get("https://api.hgbrasil.com/weather", {
+			params: {
+				key: "efbf1256",
+				lat,
+				lon,
+				user_ip: "remote",
+				}	
+			}).then(response => {
+				setWeatherData(response.data);
+			});
+		})();
+		
+		console.log(weatherData);
 
 	}, [attData]);
 
@@ -51,9 +57,7 @@ export default function App() {
 			<ImageBG source={{  uri: BGImage }}>
 				<InfoArea >	
 				<InfoPress onPress={handleAttData}>
-					<Text>{weatherData.current.feelslike}</Text>
-					<Text>Weather in {weatherData.location.name}</Text>
-					<Text>{weatherData.location.region}</Text>
+					<Text>oi</Text>
 				</InfoPress>
 				</InfoArea>
 			</ImageBG>
@@ -86,7 +90,7 @@ const InfoPress = styled.TouchableOpacity`
 	border-radius: 10px;
 	align-items: center;
 	background-color: #fff;
-	padding: px;
+	padding: 10px;
 	align-items: center;
 	justify-content: center;
 `
