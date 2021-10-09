@@ -23,6 +23,6 @@ Documentação do expo para mais informações: [aqui](https://docs.expo.dev/)
 
 ## Layout
 
-![primeiro layout](weather-app\assets\1.jpeg)
+![primeiro layout](.\assets\1.jpeg)
 
-![segundo layout](weather-app\assets\2.jpeg)
+![segundo layout](.\assets\2.jpeg)
